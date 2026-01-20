@@ -1,0 +1,24 @@
+name: Deploy macOS Web App
+
+on:
+  push:
+    branches:
+      - main  # ඔයාගේ branch එකේ නම main ද master ද කියලා බලන්න
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build # React build එක හැදෙන folder එක
+          branch: gh-pages # මේක වෙනස් කරන්න එපා
