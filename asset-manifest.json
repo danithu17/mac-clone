@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/mac-clone/static/css/main.e6c13ad2.css",
-    "main.js": "/mac-clone/static/js/main.aebbed5f.js",
+    "main.js": "/mac-clone/static/js/main.451378e8.js",
     "index.html": "/mac-clone/index.html",
     "main.e6c13ad2.css.map": "/mac-clone/static/css/main.e6c13ad2.css.map",
-    "main.aebbed5f.js.map": "/mac-clone/static/js/main.aebbed5f.js.map"
+    "main.451378e8.js.map": "/mac-clone/static/js/main.451378e8.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.aebbed5f.js"
+    "static/js/main.451378e8.js"
   ]
 }
