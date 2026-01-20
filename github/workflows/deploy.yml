@@ -1,9 +1,12 @@
-name: Deploy macOS Web App
+name: Build and Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # ඔයාගේ branch එකේ නම main ද master ද කියලා බලන්න
+      - main
+
+permissions:
+  contents: write
 
 jobs:
   build-and-deploy:
@@ -17,8 +20,8 @@ jobs:
           npm install
           npm run build
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: build # React build එක හැදෙන folder එක
-          branch: gh-pages # මේක වෙනස් කරන්න එපා
+          folder: build
+          branch: gh-pages
