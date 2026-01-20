@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/mac-clone/static/css/main.e6c13ad2.css",
+    "main.js": "/mac-clone/static/js/main.e4d2e8fc.js",
+    "static/js/453.5ca70f3a.chunk.js": "/mac-clone/static/js/453.5ca70f3a.chunk.js",
+    "index.html": "/mac-clone/index.html",
+    "main.e6c13ad2.css.map": "/mac-clone/static/css/main.e6c13ad2.css.map",
+    "main.e4d2e8fc.js.map": "/mac-clone/static/js/main.e4d2e8fc.js.map",
+    "453.5ca70f3a.chunk.js.map": "/mac-clone/static/js/453.5ca70f3a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.e4d2e8fc.js"
+  ]
+}
