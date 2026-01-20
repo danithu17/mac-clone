@@ -3,8 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Apple, Wifi, Battery, Globe, MessageCircle, Play, Lock, 
   ArrowRight, Image as ImageIcon, LayoutGrid, FileText, 
+<<<<<<< HEAD
   Calculator as CalcIcon, Sliders, Sun, Volume2, Music, Search, 
   Bluetooth, Moon, hardDrive, Info
+=======
+  Calculator as CalcIcon, X, Sliders, Sun, Volume2, Music, Search, SkipBack, SkipForward
+>>>>>>> 914d82f4310500b886fbdf433cbf6ca607e91e1a
 } from 'lucide-react';
 
 export default function App() {
@@ -17,6 +21,7 @@ export default function App() {
   const [brightness, setBrightness] = useState(100);
   const [volume, setVolume] = useState(80);
   
+<<<<<<< HEAD
   // App States
   const [note, setNote] = useState('Danithu\'s MacBook Pro\n- Working Calculator\n- New Control Center\n- Online Wallpapers');
   const [calcValue, setCalcValue] = useState('0');
@@ -26,6 +31,17 @@ export default function App() {
     "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=2070",
     "https://images.unsplash.com/photo-1477346611705-65d1883cee1e?q=80&w=2070",
     "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=2070"
+=======
+  const [note, setNote] = useState('My Notes...');
+  const [calcValue, setCalcValue] = useState('0');
+
+  // ඔක්කොම Online Wallpapers විතරයි දැන් තියෙන්නේ
+  const wallpapers = [
+    "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=2070",
+    "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=2070",
+    "https://images.unsplash.com/photo-1557683311-eac922347aa1?q=80&w=2029",
+    "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=2070"
+>>>>>>> 914d82f4310500b886fbdf433cbf6ca607e91e1a
   ];
   const [wallpaper, setWallpaper] = useState(wallpapers[0]);
 
@@ -34,6 +50,7 @@ export default function App() {
     return () => clearTimeout(timer);
   }, []);
 
+<<<<<<< HEAD
   // --- Real Calculator Logic ---
   const handleCalc = (val) => {
     if (val === 'C') {
@@ -47,6 +64,11 @@ export default function App() {
     } else {
       setCalcValue(calcValue === '0' ? val : calcValue + val);
     }
+=======
+  const openApp = (appName) => {
+    setActiveApp(appName);
+    setShowLaunchpad(false); // App එකක් ඕපන් කරද්දී ලෝන්ච් පෑඩ් එක වැහෙනවා
+>>>>>>> 914d82f4310500b886fbdf433cbf6ca607e91e1a
   };
 
   const openApp = (appName) => { setActiveApp(appName); setShowLaunchpad(false); };
@@ -60,7 +82,16 @@ export default function App() {
   return (
     <div className="h-screen w-full relative font-sans select-none overflow-hidden" style={{ filter: `brightness(${brightness}%)` }}>
       
+<<<<<<< HEAD
       <motion.div key={wallpaper} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="absolute inset-0 bg-cover bg-center transition-all duration-700" style={{ backgroundImage: `url(${wallpaper})` }} />
+=======
+      {/* Background Wallpaper */}
+      <motion.div 
+        key={wallpaper} initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+        className="absolute inset-0 bg-cover bg-center transition-all duration-700" 
+        style={{ backgroundImage: `url(${wallpaper})` }} 
+      />
+>>>>>>> 914d82f4310500b886fbdf433cbf6ca607e91e1a
 
       {/* Login Screen */}
       <AnimatePresence>
@@ -114,6 +145,7 @@ export default function App() {
             )}
           </AnimatePresence>
 
+<<<<<<< HEAD
           {/* Windows */}
           <AnimatePresence>
             {activeApp && (
@@ -129,16 +161,29 @@ export default function App() {
                   </div>
                 )}
                 {activeApp === 'Notes' && <textarea value={note} onChange={(e) => setNote(e.target.value)} className="w-full h-full p-6 bg-transparent outline-none resize-none text-gray-800 text-lg font-medium" autoFocus />}
+=======
+          {/* App Windows - Improved Dragging */}
+          <AnimatePresence>
+            {activeApp && (
+              <Window title={activeApp} close={() => setActiveApp(null)}>
+                {activeApp === 'Calculator' && <div className="h-full bg-[#1e1e1e] p-4 text-white flex items-center justify-center text-4xl">0</div>}
+                {activeApp === 'Notes' && <textarea value={note} onChange={(e) => setNote(e.target.value)} className="w-full h-full p-6 bg-transparent outline-none resize-none text-gray-800 text-lg" autoFocus />}
+>>>>>>> 914d82f4310500b886fbdf433cbf6ca607e91e1a
                 {activeApp === 'Settings' && (
                   <div className="p-6">
                     <h2 className="text-sm font-bold opacity-40 mb-4 uppercase tracking-widest text-black">Appearance</h2>
                     <div className="grid grid-cols-2 gap-4">
                       {wallpapers.map((url, i) => (
+<<<<<<< HEAD
                         <div key={i} onClick={() => setWallpaper(url)} className={`cursor-pointer rounded-xl overflow-hidden border-4 ${wallpaper === url ? 'border-blue-500' : 'border-transparent shadow-md'}`}><img src={url} className="w-full h-24 object-cover bg-gray-200" alt="wp" /></div>
+=======
+                        <div key={i} onClick={() => setWallpaper(url)} className={`cursor-pointer rounded-xl overflow-hidden border-4 ${wallpaper === url ? 'border-blue-500 shadow-md' : 'border-transparent hover:scale-105 transition-all'}`}><img src={url} className="w-full h-24 object-cover" alt="wp" /></div>
+>>>>>>> 914d82f4310500b886fbdf433cbf6ca607e91e1a
                       ))}
                     </div>
                   </div>
                 )}
+<<<<<<< HEAD
                 {activeApp === 'About' && (
                   <div className="h-full flex flex-col items-center justify-center p-8 text-black gap-4 text-center">
                     <Apple size={80} fill="black" />
@@ -149,11 +194,19 @@ export default function App() {
                     </div>
                   </div>
                 )}
+=======
+                {activeApp === 'Music' && <div className="h-full bg-gradient-to-b from-gray-900 to-black text-white flex items-center justify-center flex-col gap-4"><Music size={60} /><p>Music Player</p></div>}
+                {activeApp === 'Safari' && <div className="h-full bg-white flex items-center justify-center text-gray-400">Safari Browser UI</div>}
+>>>>>>> 914d82f4310500b886fbdf433cbf6ca607e91e1a
               </Window>
             )}
           </AnimatePresence>
 
+<<<<<<< HEAD
           {/* Launchpad */}
+=======
+          {/* Launchpad - Fixed */}
+>>>>>>> 914d82f4310500b886fbdf433cbf6ca607e91e1a
           <AnimatePresence>
             {showLaunchpad && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 z-[150] backdrop-blur-3xl bg-black/20 p-20 flex flex-col items-center" onClick={() => setShowLaunchpad(false)}>
@@ -161,19 +214,31 @@ export default function App() {
                     <LaunchIcon icon={<CalcIcon size={45} color="white" />} name="Calculator" color="bg-orange-500" onClick={() => openApp('Calculator')} />
                     <LaunchIcon icon={<FileText size={45} color="white" />} name="Notes" color="bg-yellow-500" onClick={() => openApp('Notes')} />
                     <LaunchIcon icon={<ImageIcon size={45} color="white" />} name="Settings" color="bg-blue-600" onClick={() => openApp('Settings')} />
+<<<<<<< HEAD
                     <LaunchIcon icon={<Info size={45} color="white" />} name="About" color="bg-gray-700" onClick={() => openApp('About')} />
+=======
+                    <LaunchIcon icon={<Globe size={45} color="white" />} name="Safari" color="bg-blue-400" onClick={() => openApp('Safari')} />
+                    <LaunchIcon icon={<Play size={45} color="white" />} name="Music" color="bg-pink-600" onClick={() => openApp('Music')} />
+>>>>>>> 914d82f4310500b886fbdf433cbf6ca607e91e1a
                  </div>
               </motion.div>
             )}
           </AnimatePresence>
 
           {/* Dock */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/20 backdrop-blur-3xl border border-white/30 p-2.5 rounded-[30px] flex gap-3 shadow-2xl items-end px-4 z-[100] ring-1 ring-black/5">
-            <DockIcon icon={<LayoutGrid size={30} color="white" />} onClick={() => setShowLaunchpad(true)} />
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/20 backdrop-blur-3xl border border-white/30 p-2.5 rounded-[30px] flex gap-3 shadow-2xl items-end px-4 z-[100]">
+            <DockIcon icon={<LayoutGrid size={30} color="white" />} onClick={() => setShowLaunchpad(!showLaunchpad)} />
             <div className="w-[1px] h-10 bg-white/20 self-center mx-1" />
+<<<<<<< HEAD
             <DockIcon icon={<CalcIcon size={30} color="white" />} color="bg-orange-500" onClick={() => openApp('Calculator')} />
             <DockIcon icon={<FileText size={30} color="white" />} color="bg-yellow-500" onClick={() => openApp('Notes')} />
             <DockIcon icon={<ImageIcon size={30} color="white" />} color="bg-gradient-to-tr from-purple-500 to-pink-500" onClick={() => openApp('Settings')} />
+=======
+            <DockIcon icon={<Globe size={30} color="white" />} color="bg-blue-500" onClick={() => openApp('Safari')} />
+            <DockIcon icon={<CalcIcon size={30} color="white" />} color="bg-orange-500" onClick={() => openApp('Calculator')} />
+            <DockIcon icon={<FileText size={30} color="white" />} color="bg-yellow-500" onClick={() => openApp('Notes')} />
+            <DockIcon icon={<ImageIcon size={30} color="white" />} color="bg-blue-600" onClick={() => openApp('Settings')} />
+>>>>>>> 914d82f4310500b886fbdf433cbf6ca607e91e1a
             <div className="w-[1px] h-10 bg-white/20 self-center mx-1" />
             <DockIcon icon={<Lock size={30} color="white" />} color="bg-gray-800" onClick={() => setIsLocked(true)} />
           </div>
@@ -183,12 +248,27 @@ export default function App() {
   );
 }
 
+<<<<<<< HEAD
 // Sub-components
 function Window({ title, children, close }) {
   return (
     <motion.div drag dragMomentum={false} initial={{ scale: 0.9, opacity: 0, x: "-50%", y: "-50%", left: "50%", top: "50%" }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="fixed w-[420px] h-[450px] bg-white/90 backdrop-blur-3xl rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.3)] flex flex-col border border-white/40 z-50 overflow-hidden ring-1 ring-black/5">
       <div className="h-10 bg-black/5 flex items-center px-4 gap-2 cursor-grab active:cursor-grabbing">
         <div onClick={close} className="w-3 h-3 bg-[#FF5F57] rounded-full cursor-pointer hover:brightness-75" />
+=======
+function Window({ title, children, close }) {
+  return (
+    <motion.div 
+      drag 
+      dragMomentum={false} // "පා වෙනවා" වගේ ගතිය මෙතනින් නැති කළා
+      initial={{ scale: 0.9, opacity: 0, x: "-50%", y: "-50%", left: "50%", top: "50%" }} 
+      animate={{ scale: 1, opacity: 1 }} 
+      exit={{ scale: 0.9, opacity: 0 }} 
+      className="fixed w-[450px] h-[380px] bg-white/95 backdrop-blur-3xl rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex flex-col border border-white/40 z-50 overflow-hidden ring-1 ring-black/5"
+    >
+      <div className="h-10 bg-black/5 flex items-center px-4 gap-2 cursor-grab active:cursor-grabbing">
+        <div onClick={close} className="w-3 h-3 bg-[#FF5F57] rounded-full cursor-pointer hover:brightness-75 transition-all" />
+>>>>>>> 914d82f4310500b886fbdf433cbf6ca607e91e1a
         <div className="w-3 h-3 bg-[#FEBC2E] rounded-full" />
         <div className="w-3 h-3 bg-[#28C840] rounded-full" />
         <span className="flex-1 text-center text-[11px] font-bold opacity-30 uppercase tracking-[2px] text-black">{title}</span>
