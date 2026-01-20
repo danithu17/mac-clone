@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Apple, Wifi, Battery, Sliders, Globe, MessageCircle, Play, Lock, ArrowRight, Image as ImageIcon } from 'lucide-react';
+import { Apple, Wifi, Battery, Globe, MessageCircle, Play, Lock, ArrowRight, Image as ImageIcon } from 'lucide-react';
 
 export default function App() {
   const [booting, setBooting] = useState(true);
