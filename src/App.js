@@ -24,6 +24,7 @@ export default function App() {
   const [stagedFiles, setStagedFiles] = useState([]);
   const [calcValue, setCalcValue] = useState('0');
 
+  // Wallpaper URL
   const wallpaper = "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=2070";
 
   const fileSystem = {
@@ -65,7 +66,7 @@ export default function App() {
 
   // --- BOOTING SCREEN ---
   if (step === 'booting') return (
-    <div className="h-screen bg-black flex flex-col items-center justify-center text-white">
+    <div className="h-screen bg-black flex flex-col items-center justify-center text-white font-sans">
       <Apple size={70} fill="white" className="mb-10 animate-pulse" />
       <div className="w-44 h-1 bg-white/20 rounded-full overflow-hidden">
         <motion.div initial={{ x: -176 }} animate={{ x: 0 }} transition={{ duration: 3 }} className="w-full h-full bg-white" />
@@ -73,55 +74,85 @@ export default function App() {
     </div>
   );
 
-  // --- WELCOME SCREEN ---
-  if (step === 'welcome') return (
-    <div onClick={() => setStep('setup')} className="h-screen w-full relative flex items-center justify-center cursor-pointer">
-      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${wallpaper})` }} />
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-md" />
-      <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-white text-9xl font-bold z-10 tracking-tighter">Hello</motion.h1>
-      <p className="absolute bottom-10 text-white/50 text-xs tracking-[4px] uppercase z-10">Click to start setup</p>
-    </div>
-  );
-
-  // --- SETUP SCREEN ---
-  if (step === 'setup') return (
-    <div className="h-screen w-full bg-[#F2F2F7] flex items-center justify-center p-4">
-      <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="bg-white w-full max-w-4xl h-[550px] rounded-[40px] shadow-2xl flex overflow-hidden border border-black/5">
-        <div className="w-1/3 bg-blue-600 p-12 text-white flex flex-col justify-between">
-          <Apple size={40} fill="white" />
-          <h2 className="text-4xl font-bold leading-tight">Welcome to<br/>Mac</h2>
-        </div>
-        <div className="flex-1 p-20 flex flex-col justify-center">
-          <h3 className="text-2xl font-bold mb-4">What should we call you?</h3>
-          <input autoFocus value={userName} onChange={(e) => setUserName(e.target.value)} className="border-b-4 border-blue-600 text-3xl py-2 outline-none mb-12 w-full font-bold text-black" />
-          <button onClick={() => setStep('locked')} className="bg-blue-600 text-white w-max px-12 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all shadow-xl shadow-blue-200">Continue</button>
-        </div>
-      </motion.div>
-    </div>
-  );
-
+  // --- WRAPPER FOR SCREENS WITH WALLPAPER ---
   return (
     <div className="h-screen w-full relative overflow-hidden select-none font-sans" style={{ filter: `brightness(${brightness}%)` }}>
-      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${wallpaper})` }} />
+      {/* GLOBAL WALLPAPER BACKGROUND */}
+      <div className="absolute inset-0 bg-cover bg-center transition-all duration-1000" style={{ backgroundImage: `url(${wallpaper})` }} />
 
-      {/* LOCK SCREEN */}
+      {/* WELCOME SCREEN (HELLO) */}
       <AnimatePresence>
-        {step === 'locked' && (
-          <motion.div exit={{ opacity: 0, scale: 1.1 }} className="absolute inset-0 z-[200] flex flex-col items-center justify-center backdrop-blur-3xl bg-black/20 text-white">
-            <div className="w-28 h-28 rounded-full bg-white/20 mb-6 border border-white/30 overflow-hidden shadow-2xl">
-              <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${userName}`} alt="user" />
-            </div>
-            <h1 className="text-3xl font-bold mb-10 tracking-tight">{userName}</h1>
-            <input type="password" onKeyDown={(e) => e.key === 'Enter' && setStep('desktop')} className="bg-white/10 border border-white/20 rounded-full px-6 py-3 text-center outline-none w-72 backdrop-blur-xl text-lg shadow-2xl" placeholder="Enter 1234" autoFocus />
+        {step === 'welcome' && (
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }}
+            onClick={() => setStep('setup')} 
+            className="absolute inset-0 z-[300] flex flex-col items-center justify-center cursor-pointer bg-black/30 backdrop-blur-lg"
+          >
+            <motion.h1 
+              initial={{ y: 20, opacity: 0 }} 
+              animate={{ y: 0, opacity: 1 }} 
+              className="text-white text-9xl font-bold tracking-tighter"
+            >
+              Hello
+            </motion.h1>
+            <p className="absolute bottom-10 text-white/50 text-xs tracking-[4px] uppercase">Click to start setup</p>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* DESKTOP */}
+      {/* SETUP SCREEN */}
+      <AnimatePresence>
+        {step === 'setup' && (
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 z-[250] bg-[#F2F2F7] flex items-center justify-center p-4"
+          >
+            <div className="bg-white w-full max-w-4xl h-[550px] rounded-[40px] shadow-2xl flex overflow-hidden border border-black/5">
+              <div className="w-1/3 bg-blue-600 p-12 text-white flex flex-col justify-between">
+                <Apple size={40} fill="white" />
+                <h2 className="text-4xl font-bold leading-tight">Welcome to<br/>Mac</h2>
+              </div>
+              <div className="flex-1 p-20 flex flex-col justify-center">
+                <h3 className="text-2xl font-bold mb-4">What should we call you?</h3>
+                <input autoFocus value={userName} onChange={(e) => setUserName(e.target.value)} className="border-b-4 border-blue-600 text-3xl py-2 outline-none mb-12 w-full font-bold text-black" />
+                <button onClick={() => setStep('locked')} className="bg-blue-600 text-white w-max px-12 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all shadow-xl shadow-blue-200">Continue</button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* LOCK SCREEN */}
+      <AnimatePresence>
+        {step === 'locked' && (
+          <motion.div 
+            exit={{ opacity: 0, scale: 1.1 }} 
+            className="absolute inset-0 z-[200] flex flex-col items-center justify-center backdrop-blur-3xl bg-black/20 text-white"
+          >
+            <div className="w-28 h-28 rounded-full bg-white/20 mb-6 border border-white/30 overflow-hidden shadow-2xl">
+              <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${userName}`} alt="user" />
+            </div>
+            <h1 className="text-3xl font-bold mb-10 tracking-tight">{userName}</h1>
+            <input 
+              type="password" 
+              onKeyDown={(e) => e.key === 'Enter' && setStep('desktop')} 
+              className="bg-white/10 border border-white/20 rounded-full px-6 py-3 text-center outline-none w-72 backdrop-blur-xl text-lg shadow-2xl" 
+              placeholder="Enter 1234" 
+              autoFocus 
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* DESKTOP CONTENT */}
       {step === 'desktop' && (
-        <div className="h-full w-full flex flex-col">
+        <div className="h-full w-full flex flex-col relative z-10">
           {/* TOP BAR */}
-          <div className="h-8 bg-black/10 backdrop-blur-3xl flex justify-between px-5 items-center text-white text-[13px] z-[100] border-b border-white/5">
+          <div className="h-8 bg-black/10 backdrop-blur-3xl flex justify-between px-5 items-center text-white text-[13px] border-b border-white/5">
             <div className="flex gap-5 font-bold items-center"><Apple size={16} fill="white" /><span>Finder</span><span>File</span><span>Edit</span></div>
             <div className="flex gap-4 items-center">
               <Wifi size={15} /><Sliders size={15} className="cursor-pointer" onClick={() => setShowControlCenter(!showControlCenter)} />
@@ -168,7 +199,7 @@ export default function App() {
                 {activeApp === 'Safari' && (
                   <div className="h-full flex flex-col bg-white">
                     <div className="h-12 bg-gray-100 border-b flex items-center px-4 gap-4">
-                       <div className="flex-1 bg-white border border-gray-200 rounded-lg py-1 text-xs text-gray-400 text-center">search or enter website</div>
+                       <div className="flex-1 bg-white border border-gray-200 rounded-lg py-1 text-xs text-gray-400 text-center">google.com</div>
                     </div>
                     <iframe src="https://www.bing.com" className="flex-1 w-full border-none" title="safari-browser" />
                   </div>
@@ -197,11 +228,11 @@ export default function App() {
           {/* DOCK */}
           <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-3xl border border-white/20 p-2.5 rounded-[32px] flex gap-4 shadow-2xl items-end px-5 z-[100]">
              <DockIcon icon={<Folder size={28} color="white"/>} color="bg-blue-500" onClick={() => setActiveApp('Finder')} />
-             <DockIcon icon={<Chrome size={28} color="white"/>} color="bg-white" onClick={() => setActiveApp('Safari')} />
+             <DockIcon icon={<Chrome size={28} color="white"/>} color="bg-white shadow-md" onClick={() => setActiveApp('Safari')} />
              <DockIcon icon={<TermIcon size={28} color="white"/>} color="bg-gray-800" onClick={() => setActiveApp('Terminal')} />
-             <DockIcon icon={<CalcIcon size={28} color="white"/>} color="bg-orange-500" onClick={() => setActiveApp('Calculator')} />
+             <DockIcon icon={<CalcIcon size={28} color="white"/>} color="bg-orange-500 shadow-md" onClick={() => setActiveApp('Calculator')} />
              <div className="w-[1px] h-12 bg-white/20 self-center mx-1" />
-             <DockIcon icon={<Power size={28} color="white"/>} color="bg-red-600" onClick={() => setStep('locked')} />
+             <DockIcon icon={<Power size={28} color="white"/>} color="bg-red-600 shadow-md" onClick={() => setStep('locked')} />
           </div>
         </div>
       )}
